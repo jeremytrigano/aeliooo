@@ -19,7 +19,7 @@ def commandes():
             nomClient = request.args.get('nomClient')
             # select cmd str(nomClient)
             # Réponse JSON {'commandes': [{'id': 12, 'etat': 4}, ...]}
-            return {'commandes': [{'id': 12, 'etat': 4}], 'nom': nomClient}
+            return {'commandes': [{'id': 12, 'etat': 4}, {'id': 13, 'etat': 5}], 'nom': nomClient}
         else:
             return {'status': 'aucun client'}
     # Le client passe une commandes:
