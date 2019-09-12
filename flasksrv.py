@@ -29,7 +29,7 @@ def commandes():
         # Réponse JSON {'retour': ’OK’}
         return {'retour': 'OK'}
     # La cuisine met la commande à jour:
-    # Le livreur met la commande à jour:
+    # Le livreur met la commande à jour: hghg
     # Requête PUT @/commandes
     elif request.method == 'PUT':
         # Réponse JSON {'id': 12, 'etat': 3}
