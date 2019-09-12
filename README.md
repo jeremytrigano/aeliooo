@@ -59,7 +59,7 @@ Enum des états des commandes :
 1 :Nouveau, 2 :En cours de préparation, 3 :Prêt, 4 :En cours de livraison, 5 :Livré
 
 Le client récupère ses commandes :  
-Requête GET @/commandes ?nomClient=Baratoux  
+Requête     GET @/commandes ?nomClient=Baratoux  
 Réponse JSON {'commandes':[{'id':12,'etat':4},...]}  
 Le client passe une commandes :  
 Requête POST @/commandes  
