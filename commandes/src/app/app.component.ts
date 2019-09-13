@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     this.httpClient
       .get(this.baseUrl + "/commandes?nomClient=" + nom)
       .subscribe((res: any[]) => {
+        console.log("res");
         console.log(res);
         this.commandes = res;
       });
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
 
   public onSubmit() {
     this.get_commands(this.cmdForm.value.nom);
+    console.log("value");
     console.log(this.cmdForm.value);
   }
 
