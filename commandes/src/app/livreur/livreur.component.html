@@ -1,1 +1,11 @@
-<p>livreur works!</p>
+<ul *ngIf="commandes?.commandes?.length > 0">
+  <li *ngFor="let commande of commandes?.commandes">
+    <p *ngIf="commande?.etat == 1">Commande numéro {{ commande?.id }} état Nouvelle</p>
+    <p *ngIf="commande?.etat == 2">Commande numéro {{ commande?.id }} état En cours de préparation</p>
+    <p *ngIf="commande?.etat == 3">Commande numéro {{ commande?.id }} état <input type="submit" value="Prête"
+        (click)="onSubmitLiv(commande?.id, 4)" /></p>
+    <p *ngIf="commande?.etat == 4">Commande numéro {{ commande?.id }} état <input type="submit"
+        value="En cours de livraison" (click)="onSubmitLiv(commande?.id, 5)" /></p>
+    <p *ngIf="commande?.etat == 5">Commande numéro {{ commande?.id }} état Livrée</p>
+  </li>
+</ul>

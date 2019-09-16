@@ -1,10 +1,1 @@
-<form [formGroup]="cmdForm">
-  <input type="text" placeholder="Entrer un nom" formControlName="nom" />
-  <input type="text" placeholder="Entrer une adresse" formControlName="adresse" />
-  <input type="submit" value="Commander" (click)="onSubmit()" />
-</form>
-<ul *ngIf="commandes?.commandes?.length > 0">
-  <li *ngFor="let commande of commandes?.commandes">
-    Commande numéro {{ commande?.id }} état {{ commande?.etat }}
-  </li>
-</ul>
+<router-outlet></router-outlet>
