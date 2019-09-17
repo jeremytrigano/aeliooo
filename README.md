@@ -74,6 +74,6 @@ Réponse JSON {'id':12,'etat':3}
 Le livreur récupère ses livraisons :  
 Requête GET @/commandes/livreur  
 Réponse JSON {'commandes':[{'id':12,'nom':'Baratoux','etat':4},...]}  
-La cuisine met la commande à jour :  
+La livreur met la commande à jour :  
 Requête PUT @/commandes  
 Réponse JSON {'id':12,'etat':5}
