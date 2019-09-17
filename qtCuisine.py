@@ -1,10 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+    Application avec interface Qt pour les Cuisine
+    ======================
+ 
+    Exécuter pour commencer la gestion des commandes en cuisine.
+ 
+ 
+"""
+
 import sys
-from PySide2.QtWidgets import QApplication, QTableWidget, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QPushButton
+from PySide2.QtWidgets import (
+    QApplication, QTableWidget, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QPushButton)
 import requests
 import json
 import sys
 import re
 
+# adresse du serveur flask
 baseurl = 'http://localhost:5000/'
 
 
@@ -13,6 +27,8 @@ class wCuisine(QWidget):
         super(wCuisine, self).__init__()
         self.layoutV = QVBoxLayout()
         self.tableWidget = QTableWidget()
+        self.tableWidget.horizontalHeader().hide()
+        self.tableWidget.verticalHeader().hide()
         self.tableWidget.setColumnCount(3)
 
         self.creationForm()
@@ -33,9 +49,12 @@ class wCuisine(QWidget):
             self.cmdName = QLabel(f"Commande numéro {cmd['id']}")
             if cmd['etat'] == 1:
                 self.buttonEprep = QPushButton("À préparer")
+                self.buttonEprep.setProperty(
+                    'cmdId', f"pushButton_e{cmd['id']}")
             else:
                 self.buttonEprep = QPushButton("En préparation")
-            self.buttonEprep.setProperty('cmdId', f"pushButton_e{cmd['id']}")
+                self.buttonEprep.setProperty(
+                    'cmdId', f"pushButton_ce{cmd['id']}")
             self.buttonPrep = QPushButton("Préparée")
             self.buttonPrep.setProperty('cmdId', f"pushButton_p{cmd['id']}")
 
@@ -48,6 +67,7 @@ class wCuisine(QWidget):
 
             cpt += 1
 
+    # actions liées au clic de boutons
     def ePrep(self):
         pb = self.sender()
         cmdIdProp = pb.property('cmdId')
@@ -56,19 +76,25 @@ class wCuisine(QWidget):
             cmdId = cmdId[0]
         else:
             cmdId = 0
+        # si le bouton cliqué est "À préparer"
         if re.match("^pushButton_e", cmdIdProp):
+            print("pushButton_e")
             pb.setProperty('cmdId', f"pushButton_ce{cmdId}")
+            # modification bdd état commande à 2 En cours de préparation
             self.putReq(cmdId, 2)
             pb.setText('En préparation')
+        # si le bouton cliqué est "Préparée"
         elif re.match("^pushButton_p", cmdIdProp):
+            print("pushButton_p")
             pb.setProperty('cmdId', f"pushButton_cp{cmdId}")
+            # modification bdd état commande à 3 Prêt
             self.putReq(cmdId, 3)
             pb.setText('Terminée')
-        self.refresh()
-
-    def refresh(self):
+        # recréation du table widget
+        print("creationForm")
         self.creationForm()
 
+    # requete http PUT
     def putReq(self, idc, etat):
         requests.put(baseurl + 'commandes', json={"id": idc, "etat": etat})
 

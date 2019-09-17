@@ -1,4 +1,16 @@
-from flask import Flask, request, g, jsonify
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+    Serveur Flask Aeliooo
+    ======================
+ 
+    Exécuter pour gérer l'API Aeliooo.
+ 
+ 
+"""
+
+from flask import Flask, request, redirect, url_for, g, jsonify
 from flask_cors import CORS, cross_origin
 import sqlite3
 import json
@@ -36,7 +48,7 @@ def connect_db():
 
 @app.route('/')
 def index():
-    return "Bienvenue chez Aeliooo"
+    return redirect(url_for('commandes'))
 
 
 @app.route('/commandes', methods=['GET', 'POST', 'PUT'])
@@ -74,7 +86,8 @@ def commandes():
     # Requête PUT @/commandes
     elif request.method == 'PUT':
         res = request.get_json()
-        res = res[0]
+        if isinstance(res, list):
+            res = res[0]
         idc = res['id']
         etat = res['etat']
         db = get_db()
