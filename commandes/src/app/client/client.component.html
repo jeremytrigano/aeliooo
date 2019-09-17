@@ -1,0 +1,21 @@
+<h1>Recherche</h1>
+<form [formGroup]="cmdFormRech">
+  <input type="text" placeholder="Entrer un nom" formControlName="nom" />
+  <input type="submit" value="Commander" (click)="onSubmitRech()" />
+</form>
+
+<h1>Passer commande</h1>
+<form [formGroup]="cmdFormPass">
+  <input type="text" placeholder="Entrer un nom" formControlName="nom" />
+  <input type="text" placeholder="Entrer une adresse" formControlName="adresse" />
+  <input type="submit" value="Commander" (click)="onSubmitPass()" />
+</form>
+<ul *ngIf="commandes?.commandes?.length > 0">
+  <li *ngFor="let commande of commandes?.commandes">
+    <p *ngIf="commande?.etat == 1">Commande numéro {{ commande?.id }} état Nouvelle</p>
+    <p *ngIf="commande?.etat == 2">Commande numéro {{ commande?.id }} état En cours de préparation</p>
+    <p *ngIf="commande?.etat == 3">Commande numéro {{ commande?.id }} état Prête</p>
+    <p *ngIf="commande?.etat == 4">Commande numéro {{ commande?.id }} état En cours de livraison</p>
+    <p *ngIf="commande?.etat == 5">Commande numéro {{ commande?.id }} état Livrée</p>
+  </li>
+</ul>
