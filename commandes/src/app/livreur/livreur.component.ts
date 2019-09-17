@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class LivreurComponent implements OnInit {
   title = "commandes";
   baseUrl: string = "http://localhost:5000";
-  commandes: any[];
+  public commandes: any;
   public cmdForm: FormGroup;
   private commande: any[];
 

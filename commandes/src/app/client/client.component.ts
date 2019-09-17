@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class ClientComponent implements OnInit {
   title = "commandes";
   baseUrl: string = "http://localhost:5000";
-  commandes: any[];
+  public commandes: any;
   public cmdFormRech: FormGroup;
   public cmdFormPass: FormGroup;
   private commande: any[];
@@ -51,6 +51,7 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.commandes = [];
     this.cmdFormRech = this.fb.group({
       nom: ["", Validators.required],
       adresse: ["", Validators.required]
